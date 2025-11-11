@@ -52,26 +52,53 @@ def evaluate_instance(instance_file, solution_file):
     print("-" * 70)
 
     for name, solver_fun, params in solvers:
-        start = time.time()
-        sol = solver_fun(instance)
-        end = time.time()
+        if name == "ALNS":
+            # 🔁 20 runs indépendants avec graines différentes
+            for seed in range(20):
+                params["seed"] = seed
+                start = time.time()
+                sol = solver_fun(instance)
+                end = time.time()
 
-        my_cost = sol["cost"]
-        elapsed = end - start
-        gap = compute_gap(my_cost, opt_cost)
+                my_cost = sol["cost"]
+                elapsed = end - start
+                gap = compute_gap(my_cost, opt_cost)
 
-        print(f"{name:<22} {opt_cost:<10} {my_cost:<14.2f} {gap:<8.2f} {elapsed:<10.3f}")
+                print(f"{name+'_'+str(seed):<22} {opt_cost:<10} {my_cost:<14.2f} {gap:<8.2f} {elapsed:<10.3f}")
 
-        results.append({
-            "instance": instance_file,
-            "algo": name,
-            "cost_opt": opt_cost,
-            "cost": my_cost,
-            "gap": gap,
-            "time_s": elapsed,
-            "params": json.dumps(params)
-        })
+                results.append({
+                    "instance": instance_file,
+                    "algo": name,
+                    "seed": seed,
+                    "cost_opt": opt_cost,
+                    "cost": my_cost,
+                    "gap": gap,
+                    "time_s": elapsed,
+                    "params": json.dumps(params)
+                })
 
+        else:
+            # autres solveurs : 1 seul run
+            start = time.time()
+            sol = solver_fun(instance)
+            end = time.time()
+
+            my_cost = sol["cost"]
+            elapsed = end - start
+            gap = compute_gap(my_cost, opt_cost)
+
+            print(f"{name:<22} {opt_cost:<10} {my_cost:<14.2f} {gap:<8.2f} {elapsed:<10.3f}")
+
+            results.append({
+                "instance": instance_file,
+                "algo": name,
+                "seed": None,
+                "cost_opt": opt_cost,
+                "cost": my_cost,
+                "gap": gap,
+                "time_s": elapsed,
+                "params": json.dumps(params)
+            })
     return results
 
 
