@@ -1,0 +1,4 @@
+instance,algo,cost_opt,cost,gap,time_s,params
+A-n32-k5.vrp,ALNS,784,938.9189530918835,19.760070547434122,3.9387059211730957,"{""iters_small"": 3500, ""iters_medium"": 5000, ""iters_large"": 7000, ""destroy_ratio"": 0.1, ""start_temp"": 500.0, ""cooling"": 0.995, ""seed"": 42, ""verbose"": false}"
+X-n101-k25.vrp,ALNS,27591,32900.356518748515,19.24307389637387,26.017627239227295,"{""iters_small"": 3500, ""iters_medium"": 5000, ""iters_large"": 7000, ""destroy_ratio"": 0.1, ""start_temp"": 500.0, ""cooling"": 0.995, ""seed"": 42, ""verbose"": false}"
+ORTEC-n242-k12.vrp,ALNS,123750,178973.0,44.62464646464647,723.9333739280701,"{""iters_small"": 3500, ""iters_medium"": 5000, ""iters_large"": 7000, ""destroy_ratio"": 0.1, ""start_temp"": 500.0, ""cooling"": 0.995, ""seed"": 42, ""verbose"": false}"
